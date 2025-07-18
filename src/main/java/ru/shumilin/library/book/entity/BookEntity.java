@@ -1,9 +1,13 @@
-package ru.shumilin.library.book;
+package ru.shumilin.library.book.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
-public class Book {
+@Builder
+@ToString
+public class BookEntity {
     private Long id;
     private String title;
     private String author;

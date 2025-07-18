@@ -2,7 +2,8 @@ package ru.shumilin.library.book.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.shumilin.library.book.Book;
+import ru.shumilin.library.book.entity.BookEntity;
+import ru.shumilin.library.book.model.BookModel;
 import ru.shumilin.library.book.service.BookService;
 
 import java.util.List;
@@ -14,17 +15,17 @@ public class BookController {
     private final BookService service;
 
     @GetMapping
-    public List<Book> getBooks() {
+    public List<BookEntity> getBooks() {
         return service.findAll();
     }
 
     @PostMapping
-    public void saveBook(Book entity) {
-        service.save(entity);
+    public void saveBook(@RequestBody BookModel model) {
+        service.save(model);
     }
 
     @GetMapping("/{id}")
-    public Book getBook(@PathVariable long id) {
+    public BookEntity getBook(@PathVariable long id) {
         return service.findById(id);
     }
 
@@ -34,8 +35,8 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public List<Book> findByAuthorOrGenre(@RequestParam(required = false) String author,
-                                   @RequestParam(required = false) String genre) {
+    public List<BookEntity> findByAuthorOrGenre(@RequestParam(required = false) String author,
+                                                @RequestParam(required = false) String genre) {
         if(author != null){
             return service.findByAuthor(author);
         }else if(genre != null){
