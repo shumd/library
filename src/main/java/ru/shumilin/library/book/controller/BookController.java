@@ -34,12 +34,14 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public List<Book> findByAuthor(@RequestParam String author) {
-        return service.findByAuthor(author);
-    }
-
-    @GetMapping("/search")
-    public List<Book> findByGenre(@RequestParam String genre) {
-        return service.findByGenre(genre);
+    public List<Book> findByAuthorOrGenre(@RequestParam(required = false) String author,
+                                   @RequestParam(required = false) String genre) {
+        if(author != null){
+            return service.findByAuthor(author);
+        }else if(genre != null){
+            return service.findByGenre(genre);
+        }else {
+            throw new IllegalArgumentException("You must specify at least one author or great genre");
+        }
     }
 }
