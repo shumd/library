@@ -2,11 +2,9 @@ package ru.shumilin.library.repository;
 
 import java.util.List;
 
-public interface Repository<I,T> {
-    T findById(I id);
-    List<T> findAll();
-    void save(T t);
-    void delete(T t);
-    void deleteById(I id);
-    void update(T t);
+public interface Repository <I,R>{
+    R findById(I id);
+    List<R> findAll();
+    R save(R object);
+    void delete(R object);
 }
